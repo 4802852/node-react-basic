@@ -35,6 +35,21 @@ app.post("/register", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  // 요청된 이메일이 데이터 베이스에 있는지 확인
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (!user) return res.json({ loginSucess: false, message: "이메일을 확인해주세요." });
+
+    // 요청된 이메일이 있다면, 비밀번호가 일치하는지 확인
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch) return res.json({ loginSucess: false, message: "비밀번호가 틀렸습니다." });
+
+      // 비밀번호가 일치하면, 토큰 생성
+      user.generateToken((err, user) => {});
+    });
+  });
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
