@@ -9,6 +9,10 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+
 const config = require("./config/key");
 
 const mongoose = require("mongoose");
@@ -45,7 +49,11 @@ app.post("/login", (req, res) => {
       if (!isMatch) return res.json({ loginSucess: false, message: "비밀번호가 틀렸습니다." });
 
       // 비밀번호가 일치하면, 토큰 생성
-      user.generateToken((err, user) => {});
+      user.generateToken((err, user) => {
+        if (err) return res.status(400).send(err);
+        // 토큰을 쿠키에 저장
+        res.cookie("x_auth", user.token).status(200).json({ loginSucess: true, userId: user._id });
+      });
     });
   });
 });
