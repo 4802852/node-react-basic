@@ -70,7 +70,7 @@ userSchema.methods.generateToken = function (cb) {
   });
 };
 
-userSchema.methods.findByToken = function (token, cb) {
+userSchema.statics.findByToken = function (token, cb) {
   var user = this;
   // token 을 복호화
   jwt.verify(token, "secretToken", function (err, decoded) {
