@@ -1,7 +1,12 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../../_actions/user_action";
 
 function LoginPage() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
 
@@ -21,9 +26,13 @@ function LoginPage() {
       password: Password,
     };
 
-    axios.post('/api/users/login', body).then(response => {
-      
-    })
+    dispatch(loginUser(body)).then((response) => {
+      if (response.payload.loginSucess) {
+        navigate("/");
+      } else {
+        alert("Error");
+      }
+    });
   };
 
   return (
