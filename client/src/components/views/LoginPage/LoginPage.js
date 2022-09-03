@@ -27,7 +27,7 @@ function LoginPage() {
     };
 
     dispatch(loginUser(body)).then((response) => {
-      if (response.payload.loginSucess) {
+      if (response.payload.loginSuccess) {
         navigate("/");
       } else {
         alert("Error");
