@@ -7,7 +7,7 @@ function LandingPage() {
 
   const onLogoutHandler = () => {
     axios.get("/api/users/logout").then((response) => {
-      if (response.payload.success) {
+      if (response.data.success) {
         navigate("/login");
       } else {
         alert("로그아웃에 실패했습니다.");
