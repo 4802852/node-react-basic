@@ -1,26 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { Menu } from "antd";
+import { USER_SERVER } from "../../../Config";
 
 function RightMenu(props) {
   const navigate = useNavigate();
-
-  const [LoggedIn, setLoggedIn] = useState(false);
-  const [UserName, setUserName] = useState("");
-
-  useEffect(() => {
-    if (window.localStorage.loginSuccess) {
-      setLoggedIn(window.localStorage.loginSuccess);
-      setUserName(window.localStorage.userName);
-    }
-  }, []);
+  const isLogged = useSelector((state) => state.user.isLoggedIn);
+  const username = window.localStorage.getItem("userName");
 
   const onLogoutHandler = () => {
-    axios.get("/api/users/logout").then((response) => {
+    axios.get(`${USER_SERVER}/logout`).then((response) => {
       if (response.data.success) {
         window.localStorage.clear();
-        setLoggedIn(false);
         navigate("/login");
       } else {
         alert("로그아웃에 실패했습니다.");
@@ -30,9 +23,9 @@ function RightMenu(props) {
 
   return (
     <Menu mode="horizontal">
-      {LoggedIn ? (
+      {isLogged ? (
         <>
-          <Menu.Item key="username">{UserName}</Menu.Item>
+          <Menu.Item key="username">{username}</Menu.Item>
           <Menu.Item key="logout">
             <span onClick={onLogoutHandler}>Logout</span>
           </Menu.Item>

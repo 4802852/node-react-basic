@@ -24,8 +24,8 @@ function App() {
             <Route exact path="/register" element={<AuthRegisterPage />} />
           </Routes>
         </div>
+        <Footer />
       </Router>
-      <Footer />
     </Suspense>
   );
 }
