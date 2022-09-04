@@ -27,7 +27,12 @@ function LoginPage() {
     };
 
     dispatch(loginUser(body)).then((response) => {
+      // console.log(response.payload);
+      window.localStorage.clear();
       if (response.payload.loginSuccess) {
+        window.localStorage.setItem("loginSuccess", response.payload.loginSuccess);
+        window.localStorage.setItem("userId", response.payload.userId);
+        window.localStorage.setItem("userName", response.payload.userName);
         navigate("/");
       } else {
         alert("Error");
