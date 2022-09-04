@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 
-import "antd/dist/antd.less";
+import "antd/dist/antd.min.css";
 
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
