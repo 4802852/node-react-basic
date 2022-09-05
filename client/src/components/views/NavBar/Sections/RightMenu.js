@@ -21,27 +21,27 @@ function RightMenu(props) {
     });
   };
 
-  return (
-    <Menu mode="horizontal">
-      {isLogged ? (
-        <>
-          <Menu.Item key="username">{username}</Menu.Item>
-          <Menu.Item key="logout">
-            <span onClick={onLogoutHandler}>Logout</span>
-          </Menu.Item>
-        </>
-      ) : (
-        <>
-          <Menu.Item key="login">
-            <a href="/login">Login</a>
-          </Menu.Item>
-          <Menu.Item key="register">
-            <a href="/register">Register</a>
-          </Menu.Item>
-        </>
-      )}
-    </Menu>
-  );
+  if (isLogged) {
+    return (
+      <Menu mode={props.mode}>
+        <Menu.Item key="username">{username}</Menu.Item>
+        <Menu.Item key="logout">
+          <span onClick={onLogoutHandler}>Logout</span>
+        </Menu.Item>
+      </Menu>
+    );
+  } else {
+    return (
+      <Menu mode={props.mode}>
+        <Menu.Item key="login">
+          <a href="/login">Login</a>
+        </Menu.Item>
+        <Menu.Item key="register">
+          <a href="/register">Register</a>
+        </Menu.Item>
+      </Menu>
+    );
+  }
 }
 
 export default RightMenu;

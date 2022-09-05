@@ -1,9 +1,12 @@
 import React from "react";
+import { FaCode } from "react-icons/fa";
 
 function LandingPage() {
   return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100vh" }}>
-      <h2>시작 페이지</h2>
+    <div className="app">
+      <FaCode style={{ fontSize: "4rem" }} />
+      <br />
+      <span style={{ fontSize: "2rem" }}>시작페이지</span>
     </div>
   );
 }
