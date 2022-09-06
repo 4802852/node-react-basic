@@ -33,6 +33,6 @@ input.error {
 
 .input-feedback {
   color: red;
-  height: 5px;
-  margin-top: -12px;
+  height: 0px;
+  margin-top: -2px;
 }
